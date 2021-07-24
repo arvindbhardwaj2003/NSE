@@ -1,0 +1,1 @@
+## This code is to get details of All group from device using SOAP API
