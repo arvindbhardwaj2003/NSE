@@ -7,6 +7,8 @@ use lib qw(/usr/share/fireflow/local/etc/site/lib);
 use AFAWebServicesClient;
 use Data::Dumper;
 
+open(FH, '>', '/tmp/hostGroupDetails.log') or die $!;
+
 my $user = 'admin';
 my $pass = 'algosec';
 
@@ -18,4 +20,6 @@ print "PS Custom Report:  Session Id generated - $sessionId \n";
 
 my @groupName = AFAWebServicesClient::GetHostGroupsRequest($sessionId,'Bamba');
 
-print Dumper(@groupName);
+print FH Dumper(@groupName)."\n";
+
+print @groupName."\n";
