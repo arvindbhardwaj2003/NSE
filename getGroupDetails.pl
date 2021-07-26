@@ -29,5 +29,19 @@ my $totalHostNames = scalar (@groupName);
 for (my $i=0; $i < $totalHostNames; $i++) {
       if ($groupName [$i]{'Members'} ne ''){
       print "$groupName [$i]{'Members'}  is:". Dumper($groupName [$i]{'Members'})."\n";
+      #printGroupMembers($groupName [$i]{'Members'});
 }
    }
+
+sub printGroupMembers{
+   @groupMember = shift;
+
+   my $totalHostNames = scalar (@groupName);
+
+   print "$totalHostNames \n";
+   #print Dumper(@groupMember)."\n";
+   foreach my $member (@groupMember){
+           #print $member."\n";
+   }
+
+}
