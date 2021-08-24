@@ -43,6 +43,9 @@ sub getCustomFieldValue {
 	my $mkt ;
 	my @envArray;
 
+	
+
+
 	if (ref($val->{'Environment'}) eq 'ARRAY'){
 	   @envArray = @{$val->{'Environment'}};
 		$env = join(',',@{$val->{'Environment'}});
@@ -238,6 +241,33 @@ sub getAndSetLatestGroupName{
 	}
 	+
 	return $groupName;
+}
+
+#
+
+##########################################################################################
+#	Method Name: setCustomField
+#
+##########################################################################################
+#
+#	Description: Just a quick subroutine to simplify the process of setting an AFF ticket's custom field
+#	
+#	Input: Ticket Object and Custom Field Name
+#
+#	Output: Updated Custom Field
+#				
+##########################################################################################
+sub setCustomField{
+  my $ticket = shift;
+  my $cf_name = shift;
+  my $cf_value = shift;
+  $RT::Logger->info("PS: HP Integration setting custom field [$cf_name] for FireFlow [ ". $ticket->id() ." ] to value [ $cf_value ].");
+  $ticket->MarkTicketAsAllowToChangeCFs();
+  my $cf = RT::CustomField->new($RT::SystemUser);
+  $cf->Load($cf_name);
+  $ticket->AddCustomFieldValue(Field => $cf, Value => "$cf_value");
+  $ticket->UnMarkTicketAsAllowToChangeCFs();
+	return 1;
 }
 
 1;
